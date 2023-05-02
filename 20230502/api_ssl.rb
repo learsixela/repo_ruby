@@ -24,4 +24,30 @@ end
 #limitar el resultado a 5 
 data = request('https://jsonplaceholder.typicode.com/photos')[0..5]
 
-puts "data #{data}"
+#puts "data #{data}"
+
+#nuevo arreglo a partir del hash
+photos = data.map{|x| x['url']}
+#impresion del arreglo de urls
+puts photos.to_s
+puts
+puts photos[0]
+
+html = "
+<!DOCTYPE html>
+<html lang=\"en\">
+<head>
+    <meta charset=\"UTF-8\">
+    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
+    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+    <title>Document</title>
+</head>
+<body>
+" 
+#<img src="" ><img><img><img><img><img>
+photos.each do |photo|
+    html += "<img src=\"#{photo}\">\n"# html = html + "<img src="">"
+end
+html += "</body></html>"
+
+File.write("index.html", html)
